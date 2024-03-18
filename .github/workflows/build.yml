@@ -1,0 +1,112 @@
+# https://github.com/robbert-vdh/nih-plug/blob/master/.github/workflows/build.yml
+
+name: Build plugin
+
+# on:
+#   push:
+#     branches:
+#       - '**'
+#     tags:
+#       - '*'
+#   pull_request:
+#     branches:
+#       - master
+on: workflow_dispatch
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  package:
+    strategy:
+      matrix:
+        include:
+          - { name: ubuntu-20.04,       os: ubuntu-20.04,   cross-target: '' }
+          - { name: macos-universal,    os: macos-11,       cross-target: aarch64-apple-darwin }
+          - { name: windows,            os: windows-latest, cross-target: '' }
+    name: Build plugin
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Fetch all git history
+        run: git fetch --force --prune --tags --unshallow
+
+      - name: Install dependencies
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libgl-dev libjack-dev libx11-xcb-dev  libxcb1-dev libxcb-dri2-0-dev libxcb-icccm4-dev libxcursor-dev libxkbcommon-dev libxcb-shape0-dev libxcb-xfixes0-dev
+
+      - uses: actions/cache@v3
+        # FIXME: Caching `target/` causes the Windows runner to blow up after some time
+        if: startsWith(matrix.os, 'windows')
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ matrix.name }}-${{ matrix.cross-target }}
+      - uses: actions/cache@v3
+        if: "!startsWith(matrix.os, 'windows')"
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ matrix.name }}-${{ matrix.cross-target }}
+
+      - name: Set up Rust toolchain
+        # Needed for SIMD
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          # The macOS AArch64 build is done from an x86_64 macOS CI runner, so
+          # it needs to be cross compiled
+          targets: ${{ matrix.cross-target }}
+
+      - name: Build plugin
+        run: |
+          runner_name=${{ matrix.name }}
+          if [[ runner_name = 'macos-universal' ]]; then
+            export MACOSX_DEPLOYMENT_TARGET=10.13
+            cargo xtask bundle-universal elysiera --release
+          else
+            cross_target=${{ matrix.cross-target }}
+            args=()
+            if [[ -n $cross_target ]]; then
+              args+=("--target" "$cross_target")
+            fi
+
+            cargo xtask bundle elysiera "${args[@]}" --release
+          fi
+
+      - name: Run xattr for macOS build
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          # Run xattr to remove quarantine attribute
+          xattr -cr target/bundled/elysiera.vst3
+          xattr -cr target/bundled/elysiera.clap
+
+      - name: Determine build archive name
+        run: |
+          # Run cargo pkgid
+          pkgid=$(cargo pkgid)
+          pkgid=(${pkgid//\#/ })
+          ver=${pkgid[1]}
+
+          echo "ARCHIVE_NAME=elysiera-$ver-${{ matrix.name }}" >> "$GITHUB_ENV"
+
+      - name: Move build into a directory
+        run: |
+          mkdir -p "$ARCHIVE_NAME"
+          mv target/bundled/* "$ARCHIVE_NAME"
+
+      - name: Add LICENSE file
+        run: |
+          cp LICENSE "$ARCHIVE_NAME" 
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARCHIVE_NAME }}
+          path: ${{ env.ARCHIVE_NAME }}
