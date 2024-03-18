@@ -16,11 +16,11 @@ post_gain = group_mix(vslider("[2]Post Gain [style:knob] [unit:dB]", 0.0, -30.0,
 
 group_reverb (x) = grp(hgroup("[1]Reverb", x));
 // T60 = Time (in seconds) to decay 60dB in low-frequency band
-low_decay = group_reverb(vslider("[0]Low decay [style:knob] [unit:s]", 3.7, 1.0, 8.0, 0.01));
+low_decay = group_reverb(vslider("[0]Low decay [style:knob] [unit:s]", 3.7, 1.0, 60.0, 0.01));
 // Crossover frequency (Hz) separating low and middle frequencies
 low_crossover = group_reverb(vslider("[1]LF Crossover [style:knob] [unit:Hz]", 440.0, 50.0, 1000.0, 1));
 // T60 = Time (in seconds) to decay 60dB in middle band
-mid_decay = group_reverb(vslider("[2]Mid Decay [style:knob] [unit:s]", 4.68, 1.0, 8.0, 0.01));
+mid_decay = group_reverb(vslider("[2]Mid Decay [style:knob] [unit:s]", 4.68, 1.0, 60.0, 0.01));
 // Frequency (Hz) at which the high-frequency T60 is half the middle-band's T60
 high_filter_damping = group_reverb(vslider("[3]HF Damping [style:knob] [unit:Hz]", 8600.0, 1500.0, 0.49 * 44100.0, 1));
 // Time before reverb hits

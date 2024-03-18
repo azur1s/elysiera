@@ -26,3 +26,16 @@
 21:20:59 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:455] Loaded state (562 bytes)
 21:20:59 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (562 bytes)
 21:20:59 [INFO] elysiera: Sample rate: 44100
+22:18:29 [INFO] elysiera: Sample rate: 44100
+22:18:29 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (551 bytes)
+22:18:29 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (551 bytes)
+22:18:29 [INFO] elysiera: Sample rate: 44100
+22:18:35 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (551 bytes)
+22:18:35 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (551 bytes)
+22:27:59 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (556 bytes)
+22:42:04 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (556 bytes)
+22:59:17 [INFO] elysiera: Sample rate: 44100
+22:59:17 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (551 bytes)
+22:59:17 [INFO] elysiera: Sample rate: 44100
+22:59:17 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:455] Loaded state (556 bytes)
+22:59:18 [INFO] elysiera: Sample rate: 44100
