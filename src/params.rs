@@ -42,10 +42,14 @@ pub struct ElysieraParams {
     pub pitch_b: FloatParam,
     #[id = "pitch_b_mix"]
     pub pitch_b_mix: FloatParam,
-    #[id = "mod_rate"]
-    pub mod_rate: FloatParam,
-    #[id = "mod_mix"]
-    pub mod_mix: FloatParam,
+    #[id = "pitch_mod_rate"]
+    pub pitch_mod_rate: FloatParam,
+    #[id = "pitch_mod_mix"]
+    pub pitch_mod_mix: FloatParam,
+    #[id = "volume_mod_rate"]
+    pub volume_mod_rate: FloatParam,
+    #[id = "volume_mod_mix"]
+    pub volume_mod_mix: FloatParam,
 }
 
 impl Default for ElysieraParams {
@@ -70,8 +74,10 @@ impl Default for ElysieraParams {
             pitch_a_mix: FloatParam::new("pitch_a_mix", 0.6, FloatRange::Linear {min: 0.0, max: 1.0}),
             pitch_b: FloatParam::new("pitch_b", 5.0, FloatRange::Linear {min: -12.0, max: 12.0}),
             pitch_b_mix: FloatParam::new("pitch_b_mix", 0.6, FloatRange::Linear {min: 0.0, max: 1.0}),
-            mod_rate: FloatParam::new("mod_rate", 3.1, FloatRange::Linear {min: 0.01, max: 10.0}),
-            mod_mix: FloatParam::new("mod_mix", 1.0, FloatRange::Linear {min: 0.0, max: 1.0}),
+            pitch_mod_rate: FloatParam::new("pitch_mod_rate", 3.1, FloatRange::Linear {min: 0.01, max: 10.0}),
+            pitch_mod_mix: FloatParam::new("pitch_mod_mix", 1.0, FloatRange::Linear {min: 0.0, max: 1.0}),
+            volume_mod_rate: FloatParam::new("volume_mod_rate", 3.1, FloatRange::Linear {min: 0.01, max: 10.0}),
+            volume_mod_mix: FloatParam::new("volume_mod_mix", 1.0, FloatRange::Linear {min: 0.0, max: 1.0}),
         }
     }
 }
@@ -97,8 +103,10 @@ impl ElysieraParams {
         dsp.set_param(PITCH_A_MIX, self.pitch_a_mix.value());
         dsp.set_param(PITCH_B, self.pitch_b.value());
         dsp.set_param(PITCH_B_MIX, self.pitch_b_mix.value());
-        dsp.set_param(MOD_RATE, self.mod_rate.value());
-        dsp.set_param(MOD_MIX, self.mod_mix.value());
+        dsp.set_param(PITCH_MOD_RATE, self.pitch_mod_rate.value());
+        dsp.set_param(PITCH_MOD_MIX, self.pitch_mod_mix.value());
+        dsp.set_param(VOLUME_MOD_RATE, self.volume_mod_rate.value());
+        dsp.set_param(VOLUME_MOD_MIX, self.volume_mod_mix.value());
     }
 }
 pub const MIX: ParamIndex = ParamIndex(0);
@@ -120,5 +128,7 @@ pub const PITCH_A: ParamIndex = ParamIndex(15);
 pub const PITCH_A_MIX: ParamIndex = ParamIndex(16);
 pub const PITCH_B: ParamIndex = ParamIndex(17);
 pub const PITCH_B_MIX: ParamIndex = ParamIndex(18);
-pub const MOD_RATE: ParamIndex = ParamIndex(19);
-pub const MOD_MIX: ParamIndex = ParamIndex(20);
+pub const PITCH_MOD_RATE: ParamIndex = ParamIndex(19);
+pub const PITCH_MOD_MIX: ParamIndex = ParamIndex(20);
+pub const VOLUME_MOD_RATE: ParamIndex = ParamIndex(21);
+pub const VOLUME_MOD_MIX: ParamIndex = ParamIndex(22);

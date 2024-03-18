@@ -39,3 +39,7 @@
 22:59:17 [INFO] elysiera: Sample rate: 44100
 22:59:17 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:455] Loaded state (556 bytes)
 22:59:18 [INFO] elysiera: Sample rate: 44100
+23:01:29 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (557 bytes)
+23:01:57 [INFO] elysiera: Sample rate: 44100
+23:02:00 [INFO] elysiera: Sample rate: 44100
+23:02:05 [TRACE] (1) nih_plug::wrapper::vst3::wrapper: [C:\Users\azur\.cargo\git\checkouts\nih-plug-a2d2dc277b128e13\b2586de\src\wrapper\vst3\wrapper.rs:486] Saved state (556 bytes)
