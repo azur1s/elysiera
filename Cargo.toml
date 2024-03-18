@@ -1,0 +1,36 @@
+[package]
+name = "elysiera"
+version = "0.1.0"
+edition = "2021"
+authors = ["Natapat Samutpong <natapat.samutpong@gmail.com>"]
+license = "GPL-3.0-or-later"
+homepage = "https://azur.moe"
+description = "A plugin"
+
+[workspace]
+members = ["xtask"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Remove the `assert_process_allocs` feature to allow allocations on the audio
+# thread in debug builds.
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs"] }
+# Uncomment the below line to disable the on-by-default VST3 feature to remove
+# the GPL compatibility requirement
+# nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", default_features = false, features = ["assert_process_allocs"] }
+faust-types = { git = "https://github.com/Frando/rust-faust" }
+default-boxed = "0.2.0"
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+lto = "thin"
+strip = "symbols"
+
+[profile.profiling]
+inherits = "release"
+debug = true
+strip = "none"
