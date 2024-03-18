@@ -1,2 +1,2 @@
 # elysiera
- (VST3/CLAP) A shimmer reverb plugin
+ Source code for Elysiera, a shimmer reverb plugin.
