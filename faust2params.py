@@ -179,7 +179,7 @@ with open(path, "r") as file:
     content += "}\n\n"
 
 content += f"impl ElysieraParams {{\n"
-content += f"    pub fn dsp_set_params(self, dsp: &mut Box<crate::dsp::ElysieraDSP>) {{\n"
+content += f"    pub fn dsp_set_params(&self, dsp: &mut Box<crate::dsp::ElysieraDSP>) {{\n"
 for name, index in params:
     name = name\
         .replace(' ', '_')\

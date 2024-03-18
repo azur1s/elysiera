@@ -77,7 +77,7 @@ impl Default for ElysieraParams {
 }
 
 impl ElysieraParams {
-    pub fn dsp_set_params(self, dsp: &mut Box<crate::dsp::ElysieraDSP>) {
+    pub fn dsp_set_params(&self, dsp: &mut Box<crate::dsp::ElysieraDSP>) {
         dsp.set_param(MIX, self.mix.value());
         dsp.set_param(PRE_GAIN, self.pre_gain.value());
         dsp.set_param(POST_GAIN, self.post_gain.value());
