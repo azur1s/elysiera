@@ -2,7 +2,7 @@
 name = "elysiera"
 version = "0.1.0"
 edition = "2021"
-authors = ["Natapat Samutpong <natapat.samutpong@gmail.com>"]
+authors = ["Natapat Samutpong <contact@azur.moe>"]
 license = "GPL-3.0-or-later"
 homepage = "https://azur.moe"
 description = "A plugin"
