@@ -55,7 +55,27 @@ def float_param(id):
 """
 
 def search_name(line):
+    # group_reverb(vslider("[0]Low decay [style:knob] [unit:s]", ...
+    #                       ^----------^ but discard the [0] in the regex
     return re.search(r'(?:\[\d])([a-zA-Z0-9_ ]*)', line).group(1).strip()
+
+def search_unit(line):
+    # group_reverb(vslider("[5]Reverb Mix [style:knob] [unit:%]", ...
+    #                     get the unit after the colon ^------^
+    q = re.search(r'\[unit:(.*?)\]', line)
+    if q:
+        return q.group(1)
+    else:
+        # try search if it's a unit of a quality of an eq (Q)
+        # group_filter(vslider("[1]Lowpass Q [style:knob]", ...
+        #                                 ^-^
+        q = re.search(r' Q ', line)
+        if q:
+            return "Q"
+        else:
+            # should be unreachable unless we add a new parameter type
+            return ""
+
 
 path = "faust/dsp.dsp"
 content = """\
@@ -68,10 +88,24 @@ use faust_types::{FaustDsp, ParamIndex};
 use crate::editor;
 \n"""
 param_fn = """
+fn param_db(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
+    FloatParam::new(
+        name, util::db_to_gain(default),
+        FloatRange::Skewed {
+            min: util::db_to_gain(min),
+            max: util::db_to_gain(max),
+            factor: FloatRange::gain_skew_factor(-30.0, 30.0),
+        }
+    )
+    .with_smoother(SmoothingStyle::Logarithmic(50.0))
+    .with_unit("dB")
+    .with_value_to_string(formatters::v2s_f32_gain_to_db(2))
+    .with_string_to_value(formatters::s2v_f32_gain_to_db())
+}
+
 fn param_st(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" st")
@@ -81,8 +115,7 @@ fn param_st(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam 
 
 fn param_q(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Skewed {
             min,
             max,
@@ -95,8 +128,7 @@ fn param_q(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
 
 fn param_hz(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Skewed {
             min,
             max,
@@ -110,8 +142,7 @@ fn param_hz(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam 
 
 fn param_float(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_smoother(SmoothingStyle::Linear(50.0))
@@ -120,8 +151,7 @@ fn param_float(name: &'static str, default: f32, min: f32, max: f32) -> FloatPar
 
 fn param_percentage(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" %")
@@ -132,8 +162,7 @@ fn param_percentage(name: &'static str, default: f32, min: f32, max: f32) -> Flo
 
 fn param_s(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" s")
@@ -143,8 +172,7 @@ fn param_s(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
 
 fn param_ms(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" ms")
@@ -169,18 +197,35 @@ with open(path, "r") as file:
     content += "    fn default() -> Self {\n"
     content += "        Self {\n"
     content += "            editor_state: editor::default_state(),\n\n"
+
+    max_len = 0
+    sliders = []
+
     for line in lines:
         if "slider" in line:
             name = search_name(line)
             name_case = name.lower().replace(' ', '_')
+
+            unit = search_unit(line)
+            unit_fn = unit.replace("%", "percentage").lower()
+
+            # print(f"`{name_case}` - {unit_fn}")
+
+            if len(name) > max_len:
+                max_len = len(name)
 
             val = line.split(",")
             default = val[1].strip()
             min = val[2].strip()
             max = val[3].split(")")[0].strip()
 
-            # content += f"            {name}: param(\"{name}\", {default}, {min}, {max}),\n"
-            content += f"            {name_case}: param_float(\"{name}\", {default}, {min}, {max}),\n"
+            sliders.append((
+                f"            {name_case}: param_{unit_fn}(\"{name}\", {default}, {min}, {max}),\n",
+                name_case
+            ))
+
+    for (slider, name_case) in sliders:
+        content += slider.replace(": ", ":" + " " * (max_len - len(name_case) + 1))
 
     content += "        }\n"
     content += "    }\n"

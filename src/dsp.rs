@@ -161,7 +161,7 @@ pub struct mydsp {
 	fRec33: [f32;2],
 	fVslider21: f32,
 	fRec32: [f32;2],
-	fVec5: [f32;16384],
+	fVec5: [f32;32768],
 	iConst9: i32,
 	fVec6: [f32;4096],
 	iConst10: i32,
@@ -179,7 +179,7 @@ pub struct mydsp {
 	fRec40: [f32;2],
 	fVec9: [f32;16384],
 	iConst19: i32,
-	fVec10: [f32;4096],
+	fVec10: [f32;2048],
 	iConst20: i32,
 	fRec38: [f32;2],
 	fConst22: f32,
@@ -187,7 +187,7 @@ pub struct mydsp {
 	fRec44: [f32;2],
 	fVec11: [f32;16384],
 	iConst24: i32,
-	fVec12: [f32;2048],
+	fVec12: [f32;4096],
 	iConst25: i32,
 	fRec42: [f32;2],
 	fConst27: f32,
@@ -209,9 +209,9 @@ pub struct mydsp {
 	fConst37: f32,
 	fRec57: [f32;2],
 	fRec56: [f32;2],
-	fVec17: [f32;32768],
+	fVec17: [f32;16384],
 	iConst39: i32,
-	fVec18: [f32;2048],
+	fVec18: [f32;4096],
 	iConst40: i32,
 	fRec54: [f32;2],
 	fConst42: f32,
@@ -219,7 +219,7 @@ pub struct mydsp {
 	fRec60: [f32;2],
 	fVec19: [f32;32768],
 	iConst44: i32,
-	fVec20: [f32;4096],
+	fVec20: [f32;2048],
 	iConst45: i32,
 	fRec58: [f32;2],
 	fRec14: [f32;3],
@@ -288,7 +288,7 @@ impl FaustDsp for mydsp {
 			fRec33: [0.0;2],
 			fVslider21: 0.0,
 			fRec32: [0.0;2],
-			fVec5: [0.0;16384],
+			fVec5: [0.0;32768],
 			iConst9: 0,
 			fVec6: [0.0;4096],
 			iConst10: 0,
@@ -306,7 +306,7 @@ impl FaustDsp for mydsp {
 			fRec40: [0.0;2],
 			fVec9: [0.0;16384],
 			iConst19: 0,
-			fVec10: [0.0;4096],
+			fVec10: [0.0;2048],
 			iConst20: 0,
 			fRec38: [0.0;2],
 			fConst22: 0.0,
@@ -314,7 +314,7 @@ impl FaustDsp for mydsp {
 			fRec44: [0.0;2],
 			fVec11: [0.0;16384],
 			iConst24: 0,
-			fVec12: [0.0;2048],
+			fVec12: [0.0;4096],
 			iConst25: 0,
 			fRec42: [0.0;2],
 			fConst27: 0.0,
@@ -336,9 +336,9 @@ impl FaustDsp for mydsp {
 			fConst37: 0.0,
 			fRec57: [0.0;2],
 			fRec56: [0.0;2],
-			fVec17: [0.0;32768],
+			fVec17: [0.0;16384],
 			iConst39: 0,
-			fVec18: [0.0;2048],
+			fVec18: [0.0;4096],
 			iConst40: 0,
 			fRec54: [0.0;2],
 			fConst42: 0.0,
@@ -346,7 +346,7 @@ impl FaustDsp for mydsp {
 			fRec60: [0.0;2],
 			fVec19: [0.0;32768],
 			iConst44: 0,
-			fVec20: [0.0;4096],
+			fVec20: [0.0;2048],
 			iConst45: 0,
 			fRec58: [0.0;2],
 			fRec14: [0.0;3],
@@ -513,7 +513,7 @@ impl FaustDsp for mydsp {
 		for l22 in 0..2 {
 			self.fRec32[l22 as usize] = 0.0;
 		}
-		for l23 in 0..16384 {
+		for l23 in 0..32768 {
 			self.fVec5[l23 as usize] = 0.0;
 		}
 		for l24 in 0..4096 {
@@ -546,7 +546,7 @@ impl FaustDsp for mydsp {
 		for l33 in 0..16384 {
 			self.fVec9[l33 as usize] = 0.0;
 		}
-		for l34 in 0..4096 {
+		for l34 in 0..2048 {
 			self.fVec10[l34 as usize] = 0.0;
 		}
 		for l35 in 0..2 {
@@ -561,7 +561,7 @@ impl FaustDsp for mydsp {
 		for l38 in 0..16384 {
 			self.fVec11[l38 as usize] = 0.0;
 		}
-		for l39 in 0..2048 {
+		for l39 in 0..4096 {
 			self.fVec12[l39 as usize] = 0.0;
 		}
 		for l40 in 0..2 {
@@ -603,10 +603,10 @@ impl FaustDsp for mydsp {
 		for l52 in 0..2 {
 			self.fRec56[l52 as usize] = 0.0;
 		}
-		for l53 in 0..32768 {
+		for l53 in 0..16384 {
 			self.fVec17[l53 as usize] = 0.0;
 		}
-		for l54 in 0..2048 {
+		for l54 in 0..4096 {
 			self.fVec18[l54 as usize] = 0.0;
 		}
 		for l55 in 0..2 {
@@ -621,7 +621,7 @@ impl FaustDsp for mydsp {
 		for l58 in 0..32768 {
 			self.fVec19[l58 as usize] = 0.0;
 		}
-		for l59 in 0..4096 {
+		for l59 in 0..2048 {
 			self.fVec20[l59 as usize] = 0.0;
 		}
 		for l60 in 0..2 {
@@ -659,27 +659,27 @@ impl FaustDsp for mydsp {
 		self.fConst2 = 3.1415927 / self.fConst0;
 		self.fConst3 = 5.0 * self.fConst0;
 		self.fConst4 = 0.001 * self.fConst0;
-		let mut fConst5: f32 = f32::floor(0.192303 * self.fConst0 + 0.5);
+		let mut fConst5: f32 = f32::floor(0.256891 * self.fConst0 + 0.5);
 		self.fConst6 = 6.9077554 * (fConst5 / self.fConst0);
 		self.fConst7 = 6.2831855 / self.fConst0;
-		let mut fConst8: f32 = f32::floor(0.029291 * self.fConst0 + 0.5);
-		self.iConst9 = (f32::min(8192.0, f32::max(0.0, fConst5 - fConst8))) as i32;
+		let mut fConst8: f32 = f32::floor(0.027333 * self.fConst0 + 0.5);
+		self.iConst9 = (f32::min(16384.0, f32::max(0.0, fConst5 - fConst8))) as i32;
 		self.iConst10 = (f32::min(2048.0, f32::max(0.0, fConst8 + -1.0))) as i32;
 		let mut fConst11: f32 = f32::floor(0.153129 * self.fConst0 + 0.5);
 		self.fConst12 = 6.9077554 * (fConst11 / self.fConst0);
 		let mut fConst13: f32 = f32::floor(0.020346 * self.fConst0 + 0.5);
 		self.iConst14 = (f32::min(8192.0, f32::max(0.0, fConst11 - fConst13))) as i32;
 		self.iConst15 = (f32::min(1024.0, f32::max(0.0, fConst13 + -1.0))) as i32;
-		let mut fConst16: f32 = f32::floor(0.127837 * self.fConst0 + 0.5);
+		let mut fConst16: f32 = f32::floor(0.174713 * self.fConst0 + 0.5);
 		self.fConst17 = 6.9077554 * (fConst16 / self.fConst0);
-		let mut fConst18: f32 = f32::floor(0.031604 * self.fConst0 + 0.5);
+		let mut fConst18: f32 = f32::floor(0.022904 * self.fConst0 + 0.5);
 		self.iConst19 = (f32::min(8192.0, f32::max(0.0, fConst16 - fConst18))) as i32;
-		self.iConst20 = (f32::min(2048.0, f32::max(0.0, fConst18 + -1.0))) as i32;
-		let mut fConst21: f32 = f32::floor(0.174713 * self.fConst0 + 0.5);
+		self.iConst20 = (f32::min(1024.0, f32::max(0.0, fConst18 + -1.0))) as i32;
+		let mut fConst21: f32 = f32::floor(0.127837 * self.fConst0 + 0.5);
 		self.fConst22 = 6.9077554 * (fConst21 / self.fConst0);
-		let mut fConst23: f32 = f32::floor(0.022904 * self.fConst0 + 0.5);
+		let mut fConst23: f32 = f32::floor(0.031604 * self.fConst0 + 0.5);
 		self.iConst24 = (f32::min(8192.0, f32::max(0.0, fConst21 - fConst23))) as i32;
-		self.iConst25 = (f32::min(1024.0, f32::max(0.0, fConst23 + -1.0))) as i32;
+		self.iConst25 = (f32::min(2048.0, f32::max(0.0, fConst23 + -1.0))) as i32;
 		let mut fConst26: f32 = f32::floor(0.125 * self.fConst0 + 0.5);
 		self.fConst27 = 6.9077554 * (fConst26 / self.fConst0);
 		let mut fConst28: f32 = f32::floor(0.013458 * self.fConst0 + 0.5);
@@ -690,16 +690,16 @@ impl FaustDsp for mydsp {
 		let mut fConst33: f32 = f32::floor(0.024421 * self.fConst0 + 0.5);
 		self.iConst34 = (f32::min(16384.0, f32::max(0.0, fConst31 - fConst33))) as i32;
 		self.iConst35 = (f32::min(2048.0, f32::max(0.0, fConst33 + -1.0))) as i32;
-		let mut fConst36: f32 = f32::floor(0.219991 * self.fConst0 + 0.5);
+		let mut fConst36: f32 = f32::floor(0.192303 * self.fConst0 + 0.5);
 		self.fConst37 = 6.9077554 * (fConst36 / self.fConst0);
-		let mut fConst38: f32 = f32::floor(0.019123 * self.fConst0 + 0.5);
-		self.iConst39 = (f32::min(16384.0, f32::max(0.0, fConst36 - fConst38))) as i32;
-		self.iConst40 = (f32::min(1024.0, f32::max(0.0, fConst38 + -1.0))) as i32;
-		let mut fConst41: f32 = f32::floor(0.256891 * self.fConst0 + 0.5);
+		let mut fConst38: f32 = f32::floor(0.029291 * self.fConst0 + 0.5);
+		self.iConst39 = (f32::min(8192.0, f32::max(0.0, fConst36 - fConst38))) as i32;
+		self.iConst40 = (f32::min(2048.0, f32::max(0.0, fConst38 + -1.0))) as i32;
+		let mut fConst41: f32 = f32::floor(0.219991 * self.fConst0 + 0.5);
 		self.fConst42 = 6.9077554 * (fConst41 / self.fConst0);
-		let mut fConst43: f32 = f32::floor(0.027333 * self.fConst0 + 0.5);
+		let mut fConst43: f32 = f32::floor(0.019123 * self.fConst0 + 0.5);
 		self.iConst44 = (f32::min(16384.0, f32::max(0.0, fConst41 - fConst43))) as i32;
-		self.iConst45 = (f32::min(2048.0, f32::max(0.0, fConst43 + -1.0))) as i32;
+		self.iConst45 = (f32::min(1024.0, f32::max(0.0, fConst43 + -1.0))) as i32;
 	}
 	fn instance_init(&mut self, sample_rate: i32) {
 		self.instance_constants(sample_rate);
@@ -1087,15 +1087,15 @@ impl FaustDsp for mydsp {
 			let mut fTemp50: f32 = (fSlow24 * fTemp6 * (fTemp28 * (fTemp41 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp42)) & 1048575) as usize] + fTemp40 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp38)) & 1048575) as usize]) + fTemp29 * (fTemp35 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp36)) & 1048575) as usize] + fTemp34 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp32)) & 1048575) as usize])) + fSlow22 * fTemp27 * (fTemp7 * (fTemp25 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp26)) & 1048575) as usize] + fTemp24 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp22)) & 1048575) as usize]) + fTemp8 * (fTemp19 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp20)) & 1048575) as usize] + fTemp18 * self.fRec24[((i32::wrapping_sub(self.IOTA0, iTemp16)) & 1048575) as usize]))) * (fSlow6 + fSlow5 * unsafe { ftbl1mydspSIG1[iTemp3 as usize] });
 			self.fVec4[(self.IOTA0 & 16383) as usize] = fTemp50;
 			let mut fTemp51: f32 = 0.21213204 * self.fVec4[((i32::wrapping_sub(self.IOTA0, iSlow27)) & 16383) as usize];
-			self.fRec33[0] = fSlow39 * (self.fRec19[1] + self.fRec19[2] - fSlow38 * self.fRec33[1]);
-			self.fRec32[0] = fSlow42 * (self.fRec19[1] + fSlow41 * self.fRec33[0]) + fSlow36 * self.fRec32[1];
-			self.fVec5[(self.IOTA0 & 16383) as usize] = 0.35355338 * self.fRec32[0] + 1e-20;
-			let mut fTemp52: f32 = self.fVec5[((i32::wrapping_sub(self.IOTA0, self.iConst9)) & 16383) as usize] + fTemp51 + 0.6 * self.fRec22[1];
-			self.fVec6[(self.IOTA0 & 4095) as usize] = fTemp52;
+			self.fRec33[0] = -(fSlow39 * (fSlow38 * self.fRec33[1] - (self.fRec17[1] + self.fRec17[2])));
+			self.fRec32[0] = fSlow42 * (self.fRec17[1] + fSlow41 * self.fRec33[0]) + fSlow36 * self.fRec32[1];
+			self.fVec5[(self.IOTA0 & 32767) as usize] = 0.35355338 * self.fRec32[0] + 1e-20;
+			let mut fTemp52: f32 = 0.6 * self.fRec22[1] + self.fVec5[((i32::wrapping_sub(self.IOTA0, self.iConst9)) & 32767) as usize];
+			self.fVec6[(self.IOTA0 & 4095) as usize] = fTemp52 - fTemp51;
 			self.fRec22[0] = self.fVec6[((i32::wrapping_sub(self.IOTA0, self.iConst10)) & 4095) as usize];
-			let mut fRec23: f32 = -(0.6 * fTemp52);
+			let mut fRec23: f32 = 0.6 * (fTemp51 - fTemp52);
 			let mut fTemp53: f32 = 0.21213204 * self.fVec3[((i32::wrapping_sub(self.IOTA0, iSlow27)) & 16383) as usize];
-			self.fRec37[0] = fSlow39 * (self.fRec14[1] + self.fRec14[2] - fSlow38 * self.fRec37[1]);
+			self.fRec37[0] = -(fSlow39 * (fSlow38 * self.fRec37[1] - (self.fRec14[1] + self.fRec14[2])));
 			self.fRec36[0] = fSlow51 * (self.fRec14[1] + fSlow50 * self.fRec37[0]) + fSlow49 * self.fRec36[1];
 			self.fVec7[(self.IOTA0 & 16383) as usize] = 0.35355338 * self.fRec36[0] + 1e-20;
 			let mut fTemp54: f32 = self.fVec7[((i32::wrapping_sub(self.IOTA0, self.iConst14)) & 16383) as usize] + fTemp53 - 0.6 * self.fRec34[1];
@@ -1103,20 +1103,20 @@ impl FaustDsp for mydsp {
 			self.fRec34[0] = self.fVec8[((i32::wrapping_sub(self.IOTA0, self.iConst15)) & 2047) as usize];
 			let mut fRec35: f32 = 0.6 * fTemp54;
 			let mut fTemp55: f32 = fRec35 + fRec23;
-			self.fRec41[0] = -(fSlow39 * (fSlow38 * self.fRec41[1] - (self.fRec16[1] + self.fRec16[2])));
-			self.fRec40[0] = fSlow60 * (self.fRec16[1] + fSlow59 * self.fRec41[0]) + fSlow58 * self.fRec40[1];
+			self.fRec41[0] = -(fSlow39 * (fSlow38 * self.fRec41[1] - (self.fRec18[1] + self.fRec18[2])));
+			self.fRec40[0] = fSlow60 * (self.fRec18[1] + fSlow59 * self.fRec41[0]) + fSlow58 * self.fRec40[1];
 			self.fVec9[(self.IOTA0 & 16383) as usize] = 0.35355338 * self.fRec40[0] + 1e-20;
-			let mut fTemp56: f32 = self.fVec9[((i32::wrapping_sub(self.IOTA0, self.iConst19)) & 16383) as usize] - (fTemp53 + 0.6 * self.fRec38[1]);
-			self.fVec10[(self.IOTA0 & 4095) as usize] = fTemp56;
-			self.fRec38[0] = self.fVec10[((i32::wrapping_sub(self.IOTA0, self.iConst20)) & 4095) as usize];
+			let mut fTemp56: f32 = fTemp53 + self.fVec9[((i32::wrapping_sub(self.IOTA0, self.iConst19)) & 16383) as usize] - 0.6 * self.fRec38[1];
+			self.fVec10[(self.IOTA0 & 2047) as usize] = fTemp56;
+			self.fRec38[0] = self.fVec10[((i32::wrapping_sub(self.IOTA0, self.iConst20)) & 2047) as usize];
 			let mut fRec39: f32 = 0.6 * fTemp56;
 			let mut fTemp57: f32 = fRec39 + fTemp55;
-			self.fRec45[0] = -(fSlow39 * (fSlow38 * self.fRec45[1] - (self.fRec18[1] + self.fRec18[2])));
-			self.fRec44[0] = fSlow69 * (self.fRec18[1] + fSlow68 * self.fRec45[0]) + fSlow67 * self.fRec44[1];
+			self.fRec45[0] = fSlow39 * (self.fRec16[1] + self.fRec16[2] - fSlow38 * self.fRec45[1]);
+			self.fRec44[0] = fSlow69 * (self.fRec16[1] + fSlow68 * self.fRec45[0]) + fSlow67 * self.fRec44[1];
 			self.fVec11[(self.IOTA0 & 16383) as usize] = 0.35355338 * self.fRec44[0] + 1e-20;
-			let mut fTemp58: f32 = fTemp53 + self.fVec11[((i32::wrapping_sub(self.IOTA0, self.iConst24)) & 16383) as usize] - 0.6 * self.fRec42[1];
-			self.fVec12[(self.IOTA0 & 2047) as usize] = fTemp58;
-			self.fRec42[0] = self.fVec12[((i32::wrapping_sub(self.IOTA0, self.iConst25)) & 2047) as usize];
+			let mut fTemp58: f32 = self.fVec11[((i32::wrapping_sub(self.IOTA0, self.iConst24)) & 16383) as usize] - (fTemp53 + 0.6 * self.fRec42[1]);
+			self.fVec12[(self.IOTA0 & 4095) as usize] = fTemp58;
+			self.fRec42[0] = self.fVec12[((i32::wrapping_sub(self.IOTA0, self.iConst25)) & 4095) as usize];
 			let mut fRec43: f32 = 0.6 * fTemp58;
 			self.fRec49[0] = -(fSlow39 * (fSlow38 * self.fRec49[1] - (self.fRec20[1] + self.fRec20[2])));
 			self.fRec48[0] = fSlow78 * (self.fRec20[1] + fSlow77 * self.fRec49[0]) + fSlow76 * self.fRec48[1];
@@ -1125,37 +1125,37 @@ impl FaustDsp for mydsp {
 			self.fVec14[(self.IOTA0 & 2047) as usize] = fTemp59;
 			self.fRec46[0] = self.fVec14[((i32::wrapping_sub(self.IOTA0, self.iConst30)) & 2047) as usize];
 			let mut fRec47: f32 = 0.6 * fTemp59;
-			self.fRec53[0] = fSlow39 * (self.fRec15[1] + self.fRec15[2] - fSlow38 * self.fRec53[1]);
+			self.fRec53[0] = -(fSlow39 * (fSlow38 * self.fRec53[1] - (self.fRec15[1] + self.fRec15[2])));
 			self.fRec52[0] = fSlow87 * (self.fRec15[1] + fSlow86 * self.fRec53[0]) + fSlow85 * self.fRec52[1];
 			self.fVec15[(self.IOTA0 & 32767) as usize] = 0.35355338 * self.fRec52[0] + 1e-20;
 			let mut fTemp60: f32 = fTemp51 + 0.6 * self.fRec50[1] + self.fVec15[((i32::wrapping_sub(self.IOTA0, self.iConst34)) & 32767) as usize];
 			self.fVec16[(self.IOTA0 & 4095) as usize] = fTemp60;
 			self.fRec50[0] = self.fVec16[((i32::wrapping_sub(self.IOTA0, self.iConst35)) & 4095) as usize];
 			let mut fRec51: f32 = -(0.6 * fTemp60);
-			self.fRec57[0] = -(fSlow39 * (fSlow38 * self.fRec57[1] - (self.fRec21[1] + self.fRec21[2])));
-			self.fRec56[0] = fSlow96 * (self.fRec21[1] + fSlow95 * self.fRec57[0]) + fSlow94 * self.fRec56[1];
-			self.fVec17[(self.IOTA0 & 32767) as usize] = 0.35355338 * self.fRec56[0] + 1e-20;
-			let mut fTemp61: f32 = 0.6 * self.fRec54[1] + self.fVec17[((i32::wrapping_sub(self.IOTA0, self.iConst39)) & 32767) as usize];
-			self.fVec18[(self.IOTA0 & 2047) as usize] = fTemp61 - fTemp51;
-			self.fRec54[0] = self.fVec18[((i32::wrapping_sub(self.IOTA0, self.iConst40)) & 2047) as usize];
-			let mut fRec55: f32 = 0.6 * (fTemp51 - fTemp61);
-			self.fRec61[0] = -(fSlow39 * (fSlow38 * self.fRec61[1] - (self.fRec17[1] + self.fRec17[2])));
-			self.fRec60[0] = fSlow105 * (self.fRec17[1] + fSlow104 * self.fRec61[0]) + fSlow103 * self.fRec60[1];
+			self.fRec57[0] = -(fSlow39 * (fSlow38 * self.fRec57[1] - (self.fRec19[1] + self.fRec19[2])));
+			self.fRec56[0] = fSlow96 * (self.fRec19[1] + fSlow95 * self.fRec57[0]) + fSlow94 * self.fRec56[1];
+			self.fVec17[(self.IOTA0 & 16383) as usize] = 0.35355338 * self.fRec56[0] + 1e-20;
+			let mut fTemp61: f32 = fTemp51 + 0.6 * self.fRec54[1] + self.fVec17[((i32::wrapping_sub(self.IOTA0, self.iConst39)) & 16383) as usize];
+			self.fVec18[(self.IOTA0 & 4095) as usize] = fTemp61;
+			self.fRec54[0] = self.fVec18[((i32::wrapping_sub(self.IOTA0, self.iConst40)) & 4095) as usize];
+			let mut fRec55: f32 = -(0.6 * fTemp61);
+			self.fRec61[0] = -(fSlow39 * (fSlow38 * self.fRec61[1] - (self.fRec21[1] + self.fRec21[2])));
+			self.fRec60[0] = fSlow105 * (self.fRec21[1] + fSlow104 * self.fRec61[0]) + fSlow103 * self.fRec60[1];
 			self.fVec19[(self.IOTA0 & 32767) as usize] = 0.35355338 * self.fRec60[0] + 1e-20;
 			let mut fTemp62: f32 = 0.6 * self.fRec58[1] + self.fVec19[((i32::wrapping_sub(self.IOTA0, self.iConst44)) & 32767) as usize];
-			self.fVec20[(self.IOTA0 & 4095) as usize] = fTemp62 - fTemp51;
-			self.fRec58[0] = self.fVec20[((i32::wrapping_sub(self.IOTA0, self.iConst45)) & 4095) as usize];
+			self.fVec20[(self.IOTA0 & 2047) as usize] = fTemp62 - fTemp51;
+			self.fRec58[0] = self.fVec20[((i32::wrapping_sub(self.IOTA0, self.iConst45)) & 2047) as usize];
 			let mut fRec59: f32 = 0.6 * (fTemp51 - fTemp62);
-			self.fRec14[0] = self.fRec54[1] + self.fRec58[1] + self.fRec22[1] + self.fRec50[1] + self.fRec46[1] + self.fRec38[1] + self.fRec42[1] + self.fRec34[1] + fRec59 + fRec55 + fRec51 + fRec47 + fRec43 + fTemp57;
+			self.fRec14[0] = self.fRec58[1] + self.fRec22[1] + self.fRec54[1] + self.fRec50[1] + self.fRec46[1] + self.fRec42[1] + self.fRec38[1] + self.fRec34[1] + fRec59 + fRec55 + fRec51 + fRec47 + fRec43 + fTemp57;
 			let mut fTemp63: f32 = fRec35 + fRec39;
-			self.fRec15[0] = self.fRec46[1] + self.fRec38[1] + self.fRec42[1] + self.fRec34[1] + fRec47 + fRec43 + fTemp63 - (self.fRec54[1] + self.fRec58[1] + self.fRec22[1] + self.fRec50[1] + fRec59 + fRec55 + fRec51 + fRec23);
-			self.fRec16[0] = self.fRec22[1] + self.fRec50[1] + self.fRec42[1] + self.fRec34[1] + fRec51 + fRec43 + fTemp55 - (self.fRec54[1] + self.fRec58[1] + self.fRec46[1] + self.fRec38[1] + fRec59 + fRec55 + fRec39 + fRec47);
+			self.fRec15[0] = self.fRec46[1] + self.fRec42[1] + self.fRec38[1] + self.fRec34[1] + fRec47 + fRec43 + fTemp63 - (self.fRec58[1] + self.fRec22[1] + self.fRec54[1] + self.fRec50[1] + fRec59 + fRec55 + fRec51 + fRec23);
+			self.fRec16[0] = self.fRec54[1] + self.fRec50[1] + self.fRec38[1] + self.fRec34[1] + fRec55 + fRec51 + fTemp63 - (self.fRec58[1] + self.fRec22[1] + self.fRec46[1] + self.fRec42[1] + fRec59 + fRec47 + fRec43 + fRec23);
+			self.fRec17[0] = self.fRec58[1] + self.fRec22[1] + self.fRec38[1] + self.fRec34[1] + fRec59 + fTemp57 - (self.fRec54[1] + self.fRec50[1] + self.fRec46[1] + self.fRec42[1] + fRec55 + fRec51 + fRec43 + fRec47);
+			self.fRec18[0] = self.fRec22[1] + self.fRec50[1] + self.fRec42[1] + self.fRec34[1] + fRec51 + fRec43 + fTemp55 - (self.fRec58[1] + self.fRec54[1] + self.fRec46[1] + self.fRec38[1] + fRec59 + fRec55 + fRec39 + fRec47);
 			let mut fTemp64: f32 = fRec39 + fRec23;
-			self.fRec17[0] = self.fRec54[1] + self.fRec58[1] + self.fRec42[1] + self.fRec34[1] + fRec59 + fRec55 + fRec35 + fRec43 - (self.fRec22[1] + self.fRec50[1] + self.fRec46[1] + self.fRec38[1] + fRec51 + fRec47 + fTemp64);
-			self.fRec18[0] = self.fRec58[1] + self.fRec50[1] + self.fRec38[1] + self.fRec34[1] + fRec59 + fRec51 + fTemp63 - (self.fRec54[1] + self.fRec22[1] + self.fRec46[1] + self.fRec42[1] + fRec55 + fRec47 + fRec43 + fRec23);
-			self.fRec19[0] = self.fRec54[1] + self.fRec22[1] + self.fRec38[1] + self.fRec34[1] + fRec55 + fTemp57 - (self.fRec58[1] + self.fRec50[1] + self.fRec46[1] + self.fRec42[1] + fRec59 + fRec51 + fRec43 + fRec47);
-			self.fRec20[0] = self.fRec54[1] + self.fRec50[1] + self.fRec46[1] + self.fRec34[1] + fRec55 + fRec51 + fRec35 + fRec47 - (self.fRec58[1] + self.fRec22[1] + self.fRec38[1] + self.fRec42[1] + fRec59 + fRec43 + fTemp64);
-			self.fRec21[0] = self.fRec58[1] + self.fRec22[1] + self.fRec46[1] + self.fRec34[1] + fRec59 + fRec47 + fTemp55 - (self.fRec54[1] + self.fRec50[1] + self.fRec38[1] + self.fRec42[1] + fRec55 + fRec51 + fRec43 + fRec39);
+			self.fRec19[0] = self.fRec58[1] + self.fRec54[1] + self.fRec42[1] + self.fRec34[1] + fRec59 + fRec55 + fRec35 + fRec43 - (self.fRec22[1] + self.fRec50[1] + self.fRec46[1] + self.fRec38[1] + fRec51 + fRec47 + fTemp64);
+			self.fRec20[0] = self.fRec58[1] + self.fRec50[1] + self.fRec46[1] + self.fRec34[1] + fRec59 + fRec51 + fRec35 + fRec47 - (self.fRec22[1] + self.fRec54[1] + self.fRec42[1] + self.fRec38[1] + fRec55 + fRec43 + fTemp64);
+			self.fRec21[0] = self.fRec22[1] + self.fRec54[1] + self.fRec46[1] + self.fRec34[1] + fRec55 + fRec47 + fTemp55 - (self.fRec58[1] + self.fRec50[1] + self.fRec42[1] + self.fRec38[1] + fRec59 + fRec51 + fRec39 + fRec43);
 			*output0 = fSlow108 * (fSlow107 * (fSlow106 * (self.fRec15[0] + self.fRec16[0]) + fSlow26 * fTemp43) + fSlow2 * fTemp0);
 			*output1 = fSlow108 * (fSlow107 * (fSlow106 * (self.fRec15[0] - self.fRec16[0]) + fSlow26 * fTemp50) + fSlow2 * fTemp44);
 			self.iVec1[1] = self.iVec1[0];

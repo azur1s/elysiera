@@ -83,8 +83,8 @@ pub fn editor(
                             ui.end_row();
 
                             params.iter().for_each(|(name, param)| {
-                                ui.label(*name);
                                 ui.add(ParamSlider::for_param(*param, setter));
+                                ui.label(*name);
                                 ui.end_row();
                             });
                         });

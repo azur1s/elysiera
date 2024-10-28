@@ -64,29 +64,29 @@ impl Default for ElysieraParams {
         Self {
             editor_state: editor::default_state(),
 
-            mix: param_float("Mix", 0.5, 0.0, 1.0),
-            pre_gain: param_float("Pre Gain", 0.0, -30.0, 10.0),
-            post_gain: param_float("Post Gain", 0.0, -30.0, 10.0),
-            low_decay: param_float("Low decay", 3.7, 1.0, 60.0),
-            lf_crossover: param_float("LF Crossover", 440.0, 50.0, 1000.0),
-            mid_decay: param_float("Mid Decay", 4.68, 1.0, 60.0),
-            hf_damping: param_float("HF Damping", 8600.0, 1500.0, 0.49 * 44100.0),
-            reverb_delay: param_float("Reverb Delay", 0.0, 0.0, 100.0),
-            reverb_mix: param_float("Reverb Mix", 1.0, 0.0, 1.0),
-            delay: param_float("Delay", 0.5, 0.0, 5.0),
-            feedback: param_float("Feedback", 0.5, 0.0, 0.99),
-            lowpass: param_float("Lowpass", 18000.0, 25.0, 22000.0),
-            lowpass_q: param_float("Lowpass Q", 0.71, 0.1, 2.0),
-            highpass: param_float("Highpass", 250.0, 25.0, 22000.0),
-            highpass_q: param_float("Highpass Q", 0.71, 0.1, 2.0),
-            pitch_a: param_float("Pitch A", 12.0, -12.0, 12.0),
-            pitch_a_mix: param_float("Pitch A Mix", 0.6, 0.0, 1.0),
-            pitch_b: param_float("Pitch B", 5.0, -12.0, 12.0),
-            pitch_b_mix: param_float("Pitch B Mix", 0.6, 0.0, 1.0),
-            pitch_mod_rate: param_float("Pitch Mod Rate", 3.1, 0.01, 10.0),
-            pitch_mod_mix: param_float("Pitch Mod Mix", 1.0, 0.0, 1.0),
-            volume_mod_rate: param_float("Volume Mod Rate", 3.1, 0.01, 10.0),
-            volume_mod_mix: param_float("Volume Mod Mix", 1.0, 0.0, 1.0),
+            mix:             param_percentage("Mix", 0.5, 0.0, 1.0),
+            pre_gain:        param_db("Pre Gain", 0.0, -30.0, 10.0),
+            post_gain:       param_db("Post Gain", 0.0, -30.0, 10.0),
+            low_decay:       param_s("Low decay", 3.7, 1.0, 60.0),
+            lf_crossover:    param_hz("LF Crossover", 440.0, 50.0, 1000.0),
+            mid_decay:       param_s("Mid Decay", 4.68, 1.0, 60.0),
+            hf_damping:      param_hz("HF Damping", 8600.0, 1500.0, 0.49 * 44100.0),
+            reverb_delay:    param_ms("Reverb Delay", 0.0, 0.0, 100.0),
+            reverb_mix:      param_percentage("Reverb Mix", 1.0, 0.0, 1.0),
+            delay:           param_s("Delay", 0.5, 0.0, 5.0),
+            feedback:        param_percentage("Feedback", 0.5, 0.0, 0.99),
+            lowpass:         param_hz("Lowpass", 18000.0, 25.0, 22000.0),
+            lowpass_q:       param_q("Lowpass Q", 0.71, 0.1, 2.0),
+            highpass:        param_hz("Highpass", 250.0, 25.0, 22000.0),
+            highpass_q:      param_q("Highpass Q", 0.71, 0.1, 2.0),
+            pitch_a:         param_st("Pitch A", 12.0, -12.0, 12.0),
+            pitch_a_mix:     param_percentage("Pitch A Mix", 0.6, 0.0, 1.0),
+            pitch_b:         param_st("Pitch B", 5.0, -12.0, 12.0),
+            pitch_b_mix:     param_percentage("Pitch B Mix", 0.6, 0.0, 1.0),
+            pitch_mod_rate:  param_hz("Pitch Mod Rate", 3.1, 0.01, 10.0),
+            pitch_mod_mix:   param_percentage("Pitch Mod Mix", 1.0, 0.0, 1.0),
+            volume_mod_rate: param_hz("Volume Mod Rate", 3.1, 0.01, 10.0),
+            volume_mod_mix:  param_percentage("Volume Mod Mix", 1.0, 0.0, 1.0),
         }
     }
 }
@@ -143,10 +143,24 @@ pub const PITCH_MOD_MIX: ParamIndex = ParamIndex(20);
 pub const VOLUME_MOD_RATE: ParamIndex = ParamIndex(21);
 pub const VOLUME_MOD_MIX: ParamIndex = ParamIndex(22);
 
+fn param_db(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
+    FloatParam::new(
+        name, util::db_to_gain(default),
+        FloatRange::Skewed {
+            min: util::db_to_gain(min),
+            max: util::db_to_gain(max),
+            factor: FloatRange::gain_skew_factor(-30.0, 30.0),
+        }
+    )
+    .with_smoother(SmoothingStyle::Logarithmic(50.0))
+    .with_unit("dB")
+    .with_value_to_string(formatters::v2s_f32_gain_to_db(2))
+    .with_string_to_value(formatters::s2v_f32_gain_to_db())
+}
+
 fn param_st(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" st")
@@ -156,8 +170,7 @@ fn param_st(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam 
 
 fn param_q(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Skewed {
             min,
             max,
@@ -170,8 +183,7 @@ fn param_q(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
 
 fn param_hz(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Skewed {
             min,
             max,
@@ -185,8 +197,7 @@ fn param_hz(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam 
 
 fn param_float(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_smoother(SmoothingStyle::Linear(50.0))
@@ -195,8 +206,7 @@ fn param_float(name: &'static str, default: f32, min: f32, max: f32) -> FloatPar
 
 fn param_percentage(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" %")
@@ -207,8 +217,7 @@ fn param_percentage(name: &'static str, default: f32, min: f32, max: f32) -> Flo
 
 fn param_s(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" s")
@@ -218,8 +227,7 @@ fn param_s(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
 
 fn param_ms(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
     FloatParam::new(
-        name,
-        default,
+        name, default,
         FloatRange::Linear {min, max},
     )
     .with_unit(" ms")
